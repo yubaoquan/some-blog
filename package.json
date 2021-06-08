@@ -1,0 +1,25 @@
+{
+  "name": "some-blog",
+  "version": "1.0.0",
+  "description": "Based on gridsome.",
+  "main": "index.js",
+  "scripts": {
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "build": "gridsome build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yubaoquan/some-blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yubaoquan/some-blog/issues"
+  },
+  "homepage": "https://github.com/yubaoquan/some-blog#readme",
+  "dependencies": {
+    "gridsome": "^0.7.0"
+  }
+}
