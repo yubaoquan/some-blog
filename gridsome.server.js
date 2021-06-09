@@ -77,7 +77,9 @@ module.exports = function (api) {
   api.loadSource(async (ctx) => {
     addCollection = ctx.addCollection
     await loadUsers()
-    await Promise.all([loadIndexConfig(), loadJournals(), loadProjects()])
+    // addCollection('journal')
+    // addCollection('project')
+    // await Promise.all([loadIndexConfig(), loadJournals(), loadProjects()])
     // loadListFromFile({ name: 'journal', fileName: 'journals.json' })
     // loadListFromFile({ name: 'project', fileName: 'projects.json' })
   })

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/yubaoquan/some-blog#readme",
   "dependencies": {
+    "@gridsome/source-strapi": "^0.2.0",
     "axios": "^0.21.1",
     "gridsome": "^0.7.0",
     "lodash": "^4.17.21",

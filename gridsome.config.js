@@ -8,7 +8,23 @@ module.exports = {
   siteName: 'Some Blog',
   titleTemplate: '%s - Some Blog',
   siteDescription: '这是一个无聊的博客',
-  plugins: [],
+  plugins: [
+    {
+      use: '@gridsome/source-strapi',
+      options: {
+        apiURL: 'http://localhost:1337', // 这里替换成生产地址
+        queryLimit: 1000, // Defaults to 100
+        contentTypes: ['project', 'journal', 'category'],
+        singleTypes: ['index-config'],
+        // Possibility to login with a Strapi user,
+        // when content types are not publicly available (optional).
+        // loginData: {
+        //   identifier: '',
+        //   password: ''
+        // }
+      },
+    },
+  ],
   permalinks: {
     trailingSlash: false,
   },
@@ -19,13 +35,13 @@ module.exports = {
         component: './src/templates/user.vue',
       },
     ],
-    journal: [
+    StrapiJournal: [
       {
         path: '/journal/:id',
         component: './src/templates/journal.vue',
       },
     ],
-    project: [
+    StrapiProject: [
       {
         path: '/projects/:id',
         component: './src/templates/project.vue',

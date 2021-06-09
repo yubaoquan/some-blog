@@ -14,7 +14,7 @@
 
 <page-query>
 query {
-  indexConfig: allIndexConfig {
+  indexConfig: allStrapiIndexConfig {
     edges {
       node {
         title
@@ -23,20 +23,24 @@ query {
     }
   }
 
-  allProject (order: ASC) {
+  allProject: allStrapiProject (order: ASC) {
     edges {
       node {
+        id
         title
         year
         color
-        categories
-        path
-        img
+        categories {
+          title
+        }
+        img {
+          url
+        }
       }
     }
   }
 
-  allJournal (limit: 4) {
+  allJournal: allStrapiJournal (limit: 4) {
     edges {
       node {
         id
@@ -44,7 +48,6 @@ query {
         desc
         author
         date
-        path
       }
     }
   }

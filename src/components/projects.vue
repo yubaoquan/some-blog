@@ -5,15 +5,15 @@
       v-for="project in projects"
       :key="project.id"
     >
-      <g-link :to="project.path" class="project-link">
-        <g-image :src="project.img" class="thumbnail" />
+      <g-link :to="`/projects/${project.id}`" class="project-link">
+        <g-image :src="backendBase + project.img.url" class="thumbnail" />
         <h3 class="project-title">{{ project.title }}</h3>
         <div class="categories">
           <span
             class="category"
             v-for="category in project.categories"
-            :key="category"
-          >{{ category }}</span>
+            :key="category.id"
+          >{{ category.title }}</span>
         </div>
       </g-link>
     </div>
@@ -21,11 +21,18 @@
 </template>
 
 <script>
+import { backendBase } from '@/config/index.js';
+
 export default {
   name: 'Projects',
   props: {
     projects: Array,
-  }
+  },
+  data() {
+    return {
+      backendBase,
+    }
+  },
 }
 </script>
 

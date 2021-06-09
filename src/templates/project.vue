@@ -25,11 +25,14 @@
 
 <page-query>
 query ($id: ID!) {
-  project  (id: $id) {
+  project: strapiProject  (id: $id) {
     title
     year
     color
-    categories
+    categories {
+      id
+      title
+    }
     author
     content
   }

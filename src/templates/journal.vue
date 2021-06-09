@@ -27,7 +27,7 @@
 
 <page-query>
 query ($id: ID!) {
-  journal  (id: $id) {
+  journal: strapiJournal (id: $id) {
     title
     author
     date

@@ -19,7 +19,7 @@
 
 <page-query>
 query {
-  allJournal {
+  allJournal: allStrapiJournal {
     edges {
       node {
         id
