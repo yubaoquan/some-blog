@@ -1,18 +1,20 @@
 <template>
-  <footer class="my-footer">
-    <span>Copyright © 2021</span>
+  <footer class="footer">
+    <div class="container">
+      <span>Copyright © 2021</span>
+    </div>
   </footer>
 </template>
 
 <script>
 export default {
-
+  name: 'Footer',
 }
 </script>
 
-<style>
-.my-footer {
-  position: static;
-  padding: 96px;
+<style lang="less" scoped>
+.footer {
+  font-size: .8rem;
+  padding: 6rem 0
 }
 </style>

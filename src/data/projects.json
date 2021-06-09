@@ -1,0 +1,54 @@
+[
+  {
+    "id": "chelsea-landmark",
+    "title": "Banana",
+    "year": "2019",
+    "color": "pink",
+    "content": "<div>this is html</div>",
+    "img": "",
+    "author": "Nichlas W. Andersen",
+    "categories": [
+      "photography",
+      "pink"
+    ]
+  },
+  {
+    "id": "sunk",
+    "title": "Pineapple",
+    "year": "2019",
+    "color": "blue",
+    "content": "<div>this is html</div>",
+    "img": "",
+    "author": "Nichlas W. Andersen",
+    "categories": [
+      "photography",
+      "blue"
+    ]
+  },
+  {
+    "id": "3d-graff",
+    "title": "Ice Cream",
+    "year": "2019",
+    "color": "yellow",
+    "content": "<div>this is html</div>",
+    "img": "",
+    "author": "Nichlas W. Andersen",
+    "categories": [
+      "photography",
+      "yellow"
+    ]
+  },
+  {
+    "id": "ios-concept",
+    "title": "Porta400",
+    "year": "2019",
+    "color": "yellow",
+    "content": "<div>this is html</div>",
+    "img": "",
+    "author": "Nichlas W. Andersen",
+    "categories": [
+      "photography",
+      "yellow"
+    ]
+  }
+]

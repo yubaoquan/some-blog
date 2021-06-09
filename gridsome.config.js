@@ -10,19 +10,31 @@ module.exports = {
   siteDescription: '这是一个无聊的博客',
   plugins: [],
   permalinks: {
-    trailingSlash: false
+    trailingSlash: false,
   },
   templates: {
     user: [
       {
         path: '/user/:id',
-        component: './src/templates/user.vue'
-      }
-    ]
+        component: './src/templates/user.vue',
+      },
+    ],
+    journal: [
+      {
+        path: '/journal/:id',
+        component: './src/templates/journal.vue',
+      },
+    ],
+    project: [
+      {
+        path: '/projects/:id',
+        component: './src/templates/project.vue',
+      },
+    ],
   },
   css: {
     loaderOptions: {
-      less: {}
-    }
-  }
+      less: {},
+    },
+  },
 }

@@ -1,28 +1,66 @@
 <template>
   <Layout>
+    <div class="container">
+      <div class="hero">
+        <h1 class="hero-title">Simplicity. Aesthetics. Value.</h1>
+        <h2 class="hero-subtitle">Hi there, I'm an independent Digital Designer &amp; Art Director focused on digital
+          design for brands that like to have fun.</h2>
+      </div>
 
-    <!-- Learn how to use images here: https://gridsome.org/docs/images -->
-    <g-image alt="Example image" src="~/favicon.png" width="135" />
+      <Projects :projects="projects" />
 
-    <h1>Hello, world!</h1>
-
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores
-    </p>
-
-    <p class="home-links">
-      <a href="https://gridsome.org/docs/" target="_blank" rel="noopener">Gridsome Docs</a>
-      <a href="https://github.com/gridsome/gridsome" target="_blank" rel="noopener">GitHub</a>
-    </p>
-
+    </div>
+    <Latest :list="latest" />
   </Layout>
 </template>
 
+<page-query>
+query {
+  allProject {
+    edges {
+      node {
+        title
+        year
+        color
+        categories
+        path
+      }
+    }
+  }
+
+  allJournal (limit: 4) {
+    edges {
+      node {
+        id
+        title
+        desc
+        author
+        date
+        path
+      }
+    }
+  }
+}
+</page-query>
+
 <script>
+import Projects from '@/components/projects.vue';
+import Latest from '@/components/latest.vue';
+
 export default {
+  name: 'IndexPage',
   metaInfo: {
     title: 'Hello, world!'
-  }
+  },
+  components: { Projects, Latest },
+  computed: {
+    projects() {
+      return this.$page.allProject.edges.map(edge => edge.node)
+    },
+    latest() {
+      return this.$page.allJournal.edges.map(edge => edge.node)
+    },
+  },
 }
 </script>
 
