@@ -21,7 +21,8 @@
   "homepage": "https://github.com/yubaoquan/some-blog#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "gridsome": "^0.7.0"
+    "gridsome": "^0.7.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "less": "^4.1.1",

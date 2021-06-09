@@ -6,7 +6,7 @@
       :key="project.id"
     >
       <g-link :to="project.path" class="project-link">
-        <g-image :src="project.src" />
+        <g-image :src="project.img" class="thumbnail" />
         <h3 class="project-title">{{ project.title }}</h3>
         <div class="categories">
           <span

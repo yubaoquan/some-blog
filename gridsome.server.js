@@ -5,42 +5,83 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-const axios = require('axios')
-const fs = require('fs')
-const path = require('path')
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+const { fetchIndexConfig, fetchJournals, fetchProjects } = require('./src/api/index.js');
+const { pick } = require('lodash')
+const dbUrl = 'http://localhost:1337'
 
-async function loadUsers(addCollection) {
-  // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
-  const collection = addCollection('user')
+let addCollection
 
+async function loadUsers() {
   const { data } = await axios.get('https://jsonplaceholder.typicode.com/users')
-  data.forEach((item) => {
-    collection.addNode(item)
-  })
+  createCollection('user', data)
 }
 
-function loadList(addCollection, { collectionName, fileName }) {
-  const collection = addCollection(collectionName)
+async function loadIndexConfig() {
+  try {
+    const { data } = await fetchIndexConfig()
+    const collection = addCollection('indexConfig')
+    collection.addNode(pick(data, ['title', 'description']))
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function loadJournals() {
+  try {
+    const { data } = await fetchJournals()
+    createCollection('journal', data)
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function loadProjects() {
+  try {
+    const { data } = await fetchProjects()
+    const projects = data.map(item => {
+      const project = pick(item, [
+        'id',
+        'title',
+        'color',
+        'content',
+        'author',
+        'year',
+      ])
+      project.categories = item.categories.map(item => item.title)
+      project.img = dbUrl + item.img.url
+      return project
+    })
+
+    createCollection('project', projects)
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function loadListFromFile({ name, fileName }) {
   const filePath = path.resolve(__dirname, `./src/data/${fileName}`)
   const json = fs.readFileSync(filePath, 'utf-8')
-  const list = JSON.parse(json)
+  createCollection(name, JSON.parse(json))
+}
+
+function createCollection(name, list) {
+  const collection = addCollection(name)
   list.forEach(item => collection.addNode(item))
 }
 
 module.exports = function (api) {
-  api.loadSource(async ({ addCollection }) => {
-    await loadUsers(addCollection)
-    loadList(addCollection, { collectionName: 'journal', fileName: 'journals.json' })
-    loadList(addCollection, { collectionName: 'project', fileName: 'projects.json' })
+  api.loadSource(async (ctx) => {
+    addCollection = ctx.addCollection
+    await loadUsers()
+    await Promise.all([loadIndexConfig(), loadJournals(), loadProjects()])
+    // loadListFromFile({ name: 'journal', fileName: 'journals.json' })
+    // loadListFromFile({ name: 'project', fileName: 'projects.json' })
   })
 
   api.createPages(({ createPage }) => {
-    // Use the Pages API here: https://gridsome.org/docs/pages-api/
-    createPage({
-      path: '/ppp',
-      component: './src/pages/alias.vue'
-    })
-
     createPage({
       path: '/journal',
       component: './src/pages/journals.vue',

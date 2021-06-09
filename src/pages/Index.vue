@@ -2,13 +2,11 @@
   <Layout>
     <div class="container">
       <div class="hero">
-        <h1 class="hero-title">Simplicity. Aesthetics. Value.</h1>
-        <h2 class="hero-subtitle">Hi there, I'm an independent Digital Designer &amp; Art Director focused on digital
-          design for brands that like to have fun.</h2>
+        <h1 class="hero-title">{{ indexConfig.title }}</h1>
+        <h2 class="hero-subtitle">{{ indexConfig.description }}</h2>
       </div>
 
       <Projects :projects="projects" />
-
     </div>
     <Latest :list="latest" />
   </Layout>
@@ -16,6 +14,15 @@
 
 <page-query>
 query {
+  indexConfig: allIndexConfig {
+    edges {
+      node {
+        title
+        description
+      }
+    }
+  }
+
   allProject {
     edges {
       node {
@@ -24,6 +31,7 @@ query {
         color
         categories
         path
+        img
       }
     }
   }
@@ -54,6 +62,9 @@ export default {
   },
   components: { Projects, Latest },
   computed: {
+    indexConfig() {
+      return this.$page.indexConfig.edges[0].node
+    },
     projects() {
       return this.$page.allProject.edges.map(edge => edge.node)
     },
