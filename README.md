@@ -2,6 +2,10 @@
 
 Based on gridsome.
 
+## 数据配置后台
+
+[some-db](https://github.com/yubaoquan/blog-db)
+
 ## dependencies installation
 
 ### @gridsome/cli
