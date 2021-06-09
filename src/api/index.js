@@ -1,7 +1,8 @@
 const axios = require('axios');
+const { backendBase } = require('../config/index.js');
 
 const request = axios.create({
-  baseURL: 'http://localhost:1337',
+  baseURL: backendBase,
 });
 
 function genApi(config) {

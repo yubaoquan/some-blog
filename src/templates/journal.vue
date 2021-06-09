@@ -19,7 +19,7 @@
             </div>
           </div>
         </div>
-        <div class="journal-content" v-html="journal.content"></div>
+        <div class="journal-content" v-html="getHtml(journal.content)"></div>
       </div>
     </div>
   </Layout>

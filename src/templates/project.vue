@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <div class="content" v-html="project.content"></div>
+        <div class="content" v-html="getHtml(project.content)"></div>
       </div>
     </div>
   </Layout>

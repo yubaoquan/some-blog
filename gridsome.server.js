@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const { fetchIndexConfig, fetchJournals, fetchProjects } = require('./src/api/index.js');
 const { pick } = require('lodash')
-const dbUrl = 'http://localhost:1337'
+const { backendBase } = require('./src/config/index.js')
 
 let addCollection
 
@@ -51,7 +51,8 @@ async function loadProjects() {
         'year',
       ])
       project.categories = item.categories.map(item => item.title)
-      project.img = dbUrl + item.img.url
+      // TODO 发布后改成localhost
+      project.img = backendBase + item.img.url
       return project
     })
 

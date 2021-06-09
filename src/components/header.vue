@@ -1,5 +1,5 @@
 <template>
-  <header class="header" :class="{ sticky: $route.path !== '/contact' }">
+  <header class="header" :class="{ sticky }">
     <div class="container">
       <div class="left">
         <g-link to="/" aria-current="page" class="home-link active--exact active">
@@ -27,6 +27,14 @@ export default {
   name: 'Header',
   mounted() {
     console.info(this.$route)
+  },
+  computed: {
+    sticky() {
+      const { path } = this.$route;
+      if (path === '/contact') return false
+      if (path.startsWith('/journal/')) return false
+      return true
+    }
   }
 }
 </script>

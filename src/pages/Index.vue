@@ -23,7 +23,7 @@ query {
     }
   }
 
-  allProject {
+  allProject (order: ASC) {
     edges {
       node {
         title
