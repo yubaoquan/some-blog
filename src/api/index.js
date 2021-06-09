@@ -8,35 +8,48 @@ function genApi(config) {
   return () => request(config);
 }
 
-function get(config) {
-  config.method = 'GET';
-  return () => request(config);
+function get(url, config = {}) {
+  return () => request({
+    ...config,
+    url,
+    method: 'GET',
+  });
 }
 
-function post(config) {
-  config.method = 'POST';
-  return () => request(config);
+function post(url, config = {}) {
+  return () => request({
+    ...config,
+    url,
+    method: 'POST',
+  });
 }
 
-function del(config) {
-  config.method = 'DELETE';
-  return () => request(config);
+function del(url, config = {}) {
+  return () => request({
+    ...config,
+    url,
+    method: 'DELETE',
+  });
 }
 
-function put(config) {
-  config.method = 'PUT';
-  return () => request(config);
+function put(url, config = {}) {
+  return () => request({
+    ...config,
+    url,
+    method: 'PUT',
+  });
 }
 
 
-exports.fetchJournals = get({
-  url: `/journals`,
-});
+exports.fetchJournals = get('/journals');
+exports.fetchProjects = get('/projects')
+exports.fetchIndexConfig = get('/index-config')
 
-exports.fetchProjects = get({
-  url: '/projects',
-})
+exports.createFeedback = config => {
+  const { username, email, message } = config;
 
-exports.fetchIndexConfig = get({
-  url: '/index-config'
-})
+  return post('/feedbacks', {
+    ...config,
+    data: { username, email, message },
+  })()
+}

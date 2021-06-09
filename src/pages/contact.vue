@@ -7,20 +7,20 @@
           Leave me a note with any questions you might have, I'll get back to you as soon as possible.
         </p>
       </div>
-      <form name="contact" class="contact-form">
+      <form name="contact" class="contact-form" @submit.prevent="handleSubmit">
         <div class="sender-info">
           <div>
             <label for="name" class="label">Your name</label>
-            <input type="text" name="name">
+            <input type="text" name="name" v-model="form.username" required>
           </div>
           <div>
             <label for="email" class="label">Your email</label>
-            <input type="email" name="email">
+            <input type="email" name="email" v-model="form.email" required>
           </div>
         </div>
         <div class="message">
           <label for="message" class="label">Message</label>
-          <textarea name="message"></textarea>
+          <textarea name="message" v-model="form.message" required></textarea>
         </div>
         <button class="button">Submit form</button>
       </form>
@@ -29,8 +29,31 @@
 </template>
 
 <script>
+import { createFeedback } from '@/api/index.js';
+
 export default {
   name: 'ContactPage',
+  data() {
+    return {
+      form: {
+        username: '',
+        email: '',
+        message: '',
+      }
+    }
+  },
+  methods: {
+    async handleSubmit() {
+      try {
+        const { username, email, message } = this.form;
+        await createFeedback({ username, email, message })
+        alert('发送成功')
+      } catch (e) {
+        console.error(e);
+        alert('发送失败, 请稍后重试')
+      }
+    },
+  },
 }
 </script>
 
