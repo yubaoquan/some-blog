@@ -8,7 +8,6 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const { fetchIndexConfig, fetchJournals, fetchProjects } = require('./src/api/index.js');
 const { pick } = require('lodash')
 const { backendBase } = require('./src/config/index.js')
 
@@ -19,54 +18,6 @@ async function loadUsers() {
   createCollection('user', data)
 }
 
-async function loadIndexConfig() {
-  try {
-    const { data } = await fetchIndexConfig()
-    const collection = addCollection('indexConfig')
-    collection.addNode(pick(data, ['title', 'description']))
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-async function loadJournals() {
-  try {
-    const { data } = await fetchJournals()
-    createCollection('journal', data)
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-async function loadProjects() {
-  try {
-    const { data } = await fetchProjects()
-    const projects = data.map(item => {
-      const project = pick(item, [
-        'id',
-        'title',
-        'color',
-        'content',
-        'author',
-        'year',
-      ])
-      project.categories = item.categories.map(item => item.title)
-      // TODO 发布后改成localhost
-      project.img = backendBase + item.img.url
-      return project
-    })
-
-    createCollection('project', projects)
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-function loadListFromFile({ name, fileName }) {
-  const filePath = path.resolve(__dirname, `./src/data/${fileName}`)
-  const json = fs.readFileSync(filePath, 'utf-8')
-  createCollection(name, JSON.parse(json))
-}
 
 function createCollection(name, list) {
   const collection = addCollection(name)
@@ -77,11 +28,6 @@ module.exports = function (api) {
   api.loadSource(async (ctx) => {
     addCollection = ctx.addCollection
     await loadUsers()
-    // addCollection('journal')
-    // addCollection('project')
-    // await Promise.all([loadIndexConfig(), loadJournals(), loadProjects()])
-    // loadListFromFile({ name: 'journal', fileName: 'journals.json' })
-    // loadListFromFile({ name: 'project', fileName: 'projects.json' })
   })
 
   api.createPages(({ createPage }) => {

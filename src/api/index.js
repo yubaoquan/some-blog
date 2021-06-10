@@ -1,5 +1,5 @@
-const axios = require('axios');
-const { backendBase } = require('../config/index.js');
+import axios from 'axios';
+import { backendBase } from '@/config/index.js';
 
 const request = axios.create({
   baseURL: backendBase,
@@ -42,11 +42,11 @@ function put(url, config = {}) {
 }
 
 
-exports.fetchJournals = get('/journals');
-exports.fetchProjects = get('/projects')
-exports.fetchIndexConfig = get('/index-config')
+export const fetchJournals = get('/journals');
+export const fetchProjects = get('/projects')
+export const fetchIndexConfig = get('/index-config')
 
-exports.createFeedback = config => {
+export const createFeedback = config => {
   const { username, email, message } = config;
 
   return post('/feedbacks', {

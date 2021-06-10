@@ -1,1 +1,1 @@
-exports.backendBase = 'http://localhost:1337'
+exports.backendBase = 'http://106.75.153.180:1337'

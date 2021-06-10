@@ -3,6 +3,7 @@
 
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
+const { backendBase } = require('./src/config/index.js')
 
 module.exports = {
   siteName: 'Some Blog',
@@ -12,7 +13,7 @@ module.exports = {
     {
       use: '@gridsome/source-strapi',
       options: {
-        apiURL: 'http://localhost:1337', // 这里替换成生产地址
+        apiURL: backendBase, // 这里替换成生产地址
         queryLimit: 1000, // Defaults to 100
         contentTypes: ['project', 'journal', 'category'],
         singleTypes: ['index-config'],

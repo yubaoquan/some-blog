@@ -8,7 +8,7 @@
             <div class="categories-container">
               <div class="categories">
                 <span class="label">Categories</span>
-                <span class="category" v-for="(category, index) in project.categories" :key="index">{{ category }}</span>
+                <span class="category" v-for="category in project.categories" :key="category.id">{{ category.title }}</span>
               </div>
             </div>
             <div class="year-container">
